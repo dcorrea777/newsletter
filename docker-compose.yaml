@@ -1,0 +1,37 @@
+version: '3.7'
+
+networks:
+    application:
+        name: application
+        driver: bridge
+volumes:
+    mysql:
+        name: mysql
+        driver: local
+
+services:
+    app:
+        image: newsletter
+        container_name: app
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/home/php/app
+        depends_on:
+            - mysql
+        networks:
+            - application
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=admin
+            - MYSQL_DATABASE=newsletter
+            - MYSQL_USER=newsletter
+            - MYSQL_PASSWORD=12newsletter34
+        volumes:
+            - mysql:/var/lib/mysql
+        networks:
+            - application
