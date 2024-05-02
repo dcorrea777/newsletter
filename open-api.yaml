@@ -1,0 +1,450 @@
+openapi: '3.0.1'
+info:
+    title: Newsletter
+    description: API Restful para gerenciar sua newsletters
+    contact:
+        name: Danilo Correa
+        url: https://dcorrea.com.br
+        email: danilo@dcorrea.com.br
+    version: '1.0'
+servers:
+    -
+        url: http://localhost:8080/{basePath}
+        description: Server local
+        variables:
+            basePath:
+                default: v1
+tags:
+    - name: Users
+    - name: Topics
+    - name: Newsletters
+
+security:
+    - bearerAuth: []
+
+paths:
+    /users:
+        post:
+            tags:
+                - Users
+            summary: Create a new User
+            requestBody:
+                description: Input parameters to create a new User
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - name
+                                - email
+                                - password
+                            properties:
+                                name:
+                                    type: string
+                                    example: Danilo Correa
+                                email:
+                                    type: string
+                                    example: danilo@dcorrea.com.br
+                                password:
+                                    type: string
+                                    example: 123456789
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: integer
+                                                example: 1
+                                            name:
+                                                type: string
+                                                example: Danilo Correa
+                                            email:
+                                                type: string
+                                                example: danilo@dcorrea.com.br
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+    /topics:
+        get:
+            tags:
+                - Topics
+            summary: Gets the list of topics
+            responses:
+                200:
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                name:
+                                                    type: string
+                                                    example: A semana PHP
+                                                description:
+                                                    type: string
+                                                    example: my description...
+                                                created_at:
+                                                    type: string
+                                                    example: 2022-04-14T12:56:34+00:00
+                                                updated_at:
+                                                    type: string
+                                                    example: null
+                                                deleted_at:
+                                                    type: string
+                                                    example: null
+        post:
+            tags:
+                - Topics
+            summary: Create a new Topic
+            requestBody:
+                description: Input parameters to create a new Topic
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - name
+                            properties:
+                                name:
+                                    type: string
+                                    example: PHP
+                                description:
+                                    type: string
+                                    example: danilo@dcorrea.com.br
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: integer
+                                                example: 1
+                                            name:
+                                                type: string
+                                                example: Danilo Correa
+                                            description:
+                                                type: string
+                                                example: null
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+    /topics/{topicId}:
+        put:
+            tags:
+                - Topics
+            summary: Update a topics
+            parameters:
+              - 
+                in: path
+                name: topicId
+                description: ID of a topic
+                required: true
+                schema:
+                    type: string
+            responses:
+                200:
+                    description: Ok
+        get:
+            tags:
+                - Topics
+            summary: Gets a topics
+            parameters:
+              - 
+                in: path
+                name: topicId
+                description: ID of a topic
+                required: true
+                schema:
+                    type: string
+            responses:
+                200:
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            name:
+                                                type: string
+                                                example: PHP
+                                            description:
+                                                type: string
+                                                example: my description...
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+
+    /newsletters:
+        get:
+            tags:
+                - Newsletters
+            summary: Gets the list of newsletters
+            responses:
+                200:
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                name:
+                                                    type: string
+                                                    example: A semana PHP
+                                                description:
+                                                    type: string
+                                                    example: my description...
+                                                created_at:
+                                                    type: string
+                                                    example: 2022-04-14T12:56:34+00:00
+                                                updated_at:
+                                                    type: string
+                                                    example: null
+                                                deleted_at:
+                                                    type: string
+                                                    example: null
+        post:
+            tags:
+                - Newsletters
+            summary: Create a new Newsletter
+            requestBody:
+                description: Input parameters to create a new Newsletter
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - name
+                                - description
+                            properties:
+                                name:
+                                    type: string
+                                    example: A semana PHP
+                                description:
+                                    type: string
+                                    example: my description...
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: integer
+                                                example: 1
+                                            name:
+                                                type: string
+                                                example: A semana PHP
+                                            description:
+                                                type: string
+                                                example: my descriptions...
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+    /newsletters/{newsletterId}:
+        get:
+            tags:
+                - Newsletters
+            summary: Gets a newsletter
+            parameters:
+              - 
+                in: path
+                name: newsletterId
+                description: ID of a newsletter
+                required: true
+                schema:
+                    type: string
+            responses:
+                200:
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            name:
+                                                type: string
+                                                example: A semana PHP
+                                            description:
+                                                type: string
+                                                example: my description...
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+    /newsletters/{newsletterId}/subscriptions:
+        post:
+            tags:
+                - Newsletters
+            summary: Create subscription to a newsletter
+            parameters:
+              - 
+                in: path
+                name: newsletterId
+                description: ID of a newsletter
+                required: true
+                schema:
+                    type: string
+            requestBody:
+                description: Input parameters to create a subscription
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - email
+                            properties:
+                                email:
+                                    type: string
+                                    example: danilo@dcorrea.com.br
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: integer
+                                                example: 1
+                                            email:
+                                                type: string
+                                                example: danilo@dcorrea.com.br
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
+    /newsletters/{newsletterId}/messages:
+        post:
+            tags:
+                - Newsletters
+            summary: Create a message for a newsletter
+            parameters:
+              - 
+                in: path
+                name: newsletterId
+                description: ID of a newsletter
+                required: true
+                schema:
+                    type: string
+            requestBody:
+                description: Input parameters to create a message
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - subject
+                                - content
+                            properties:
+                                subject:
+                                    type: string
+                                    example: Creating a Restful API
+                                content:
+                                    type: string
+                                    example: my content ...
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: integer
+                                                example: 1
+                                            subject:
+                                                type: string
+                                                example: Creating a Restful API
+                                            content:
+                                                type: string
+                                                example: my content...
+                                            created_at:
+                                                type: string
+                                                example: 2022-04-14T12:56:34+00:00
+                                            updated_at:
+                                                type: string
+                                                example: null
+                                            deleted_at:
+                                                type: string
+                                                example: null
