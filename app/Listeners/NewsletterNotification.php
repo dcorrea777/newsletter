@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreateNewsletter;
-use App\Mail\Newsletter as NewsletterMail;
+use App\Mail\NewsletterTemplate;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,7 +29,7 @@ class NewsletterNotification
         $subscriptions = $newsletter->subscribers()->get();
 
         foreach ($subscriptions as $subscription) {
-            $this->mailer->to($subscription->email)->send(new NewsletterMail($newsletter));
+            $this->mailer->to($subscription->email)->send(new NewsletterTemplate($newsletter));
         }
     }
 }

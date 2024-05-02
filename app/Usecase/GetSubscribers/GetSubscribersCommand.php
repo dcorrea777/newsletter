@@ -13,6 +13,10 @@ use App\Usecase\ViewModelInterface;
 
 class GetSubscribersCommand implements CommandInterface
 {
+    /**
+     * @param InputModel $input
+     * @return ViewModel
+     */
     public function handler(InputModelInterface $input): ViewModelInterface
     {
         $newsletter = Newsletter::find($input->newsletterId);

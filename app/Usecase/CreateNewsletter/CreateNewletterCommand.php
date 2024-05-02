@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateNewletterCommand implements CommandInterface
 {
+    /**
+     * @param InputModel $input
+     * @return ViewModel
+     */
     public function handler(InputModelInterface $input): ViewModelInterface
     {
         if (!Auth::user()->is_admin) {

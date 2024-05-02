@@ -13,6 +13,10 @@ use Illuminate\Support\Str;
 
 class CreateUserCommand implements CommandInterface
 {
+    /**
+     * @param InputModel $input
+     * @return ViewModel
+     */
     public function handler(InputModelInterface $input): ViewModelInterface
     {
         $myPassword = Hash::make(Str::password(16, true, true, false, false));
