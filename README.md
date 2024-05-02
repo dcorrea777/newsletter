@@ -16,6 +16,72 @@ O Newsletter é um projeto pessoal de estudo que visa aplicar todos os meus conh
 * MySQL
 * Redis
 
+# Modelagem do banco de dados
+
+```mermaid
+erDiagram
+    user ||--|{ topic : has
+    user ||--|{ newsletter : has
+    message ||--|{ newsletter : has
+    newsletter ||--|{ subscription : has
+    topic ||--|{ topic_newsletter : has
+    newsletter ||--|{ topic_newsletter : has
+
+    user {
+        int id PK
+        string name
+        string email
+        string password
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+
+    newsletter {
+        int id PK
+        int user_id FK
+        string name
+        string description
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+    
+    message {
+        int id PK
+        int newsletter_id FK
+        string subject
+        string cotent
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+
+    subscription {
+        int id PK
+        int newsletter_id FK
+        string email
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+
+    topic_newsletter {
+        int topic_id
+        int newsletter_id
+    }
+
+    topic {
+        int id PK
+        int user_id FK
+        string name
+        string description
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+```
+
 # Desenvolvimento local
 
 A seguir estão as instruções para executar o aplicativo em seu ambiente local utilizando Docker e Docker Compose.
