@@ -118,7 +118,7 @@ docker-compose up -d
 
 Em seguida, execute o comando para gerar uma chave do laravel para seu ambiente local
 ```sh
-docker-compose exec app artisan key:generate
+docker-compose exec app php artisan key:generate
 ```
 
 ### Criação das Tabelas do Banco de Dados
@@ -127,11 +127,11 @@ Utilize o seguinte comando para gerar as tabelas do banco de dados:
 
 
 ```sh
-docker-compose exec app artisan migrate
+docker-compose exec app php artisan migrate
 ```
 
 ### Testes HTTP
 Para verificar se todos os testes estão passando, execute o seguindo comando
 ```sh
-docker-compose exec app artisan test
+docker-compose exec app php artisan test
 ```

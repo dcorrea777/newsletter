@@ -13,7 +13,7 @@ volumes:
         driver: local
 
 services:
-    php:
+    app:
         image: newsletter
         container_name: app
         ports:
