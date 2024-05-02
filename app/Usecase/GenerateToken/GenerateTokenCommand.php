@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class GenerateTokenCommand implements CommandInterface
 {
+    /**
+     * @param InputModel $input
+     * @return ViewModel
+     */
     public function handler(InputModelInterface $input): ViewModelInterface
     {
         $data = ['email' => $input->email, 'password' => $input->password];

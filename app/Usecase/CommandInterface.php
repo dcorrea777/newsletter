@@ -9,5 +9,9 @@ use App\Usecase\ViewModelInterface;
 
 interface CommandInterface
 {
+    /**
+     * @param InputModelInterface $input
+     * @return ViewModelInterface
+     */
     public function handler(InputModelInterface $input): ViewModelInterface;
 }
