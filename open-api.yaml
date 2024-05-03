@@ -82,7 +82,7 @@ paths:
         get:
             tags:
                 - Topics
-            summary: Gets the list of topics
+            summary: Gets a list of topics
             responses:
                 200:
                     description: Ok
@@ -96,12 +96,15 @@ paths:
                                         items:
                                             type: object
                                             properties:
+                                                id:
+                                                    type: string
+                                                    example: a8a163ed-ee48-4e80-af5d-af424c425f29
                                                 name:
                                                     type: string
-                                                    example: A semana PHP
+                                                    example: PHP
                                                 description:
                                                     type: string
-                                                    example: my description...
+                                                    example: Linguagem de programação
                                                 created_at:
                                                     type: string
                                                     example: 2022-04-14T12:56:34+00:00
@@ -130,7 +133,7 @@ paths:
                                     example: PHP
                                 description:
                                     type: string
-                                    example: danilo@dcorrea.com.br
+                                    example: Linguagem de programação
             responses:
                 201:
                     description: Created
@@ -143,14 +146,14 @@ paths:
                                         type: object
                                         properties:
                                             id:
-                                                type: integer
-                                                example: 1
+                                                type: string
+                                                example: 5a87e8ea-f0f6-46dc-a91a-1c1174601b49
                                             name:
                                                 type: string
-                                                example: Danilo Correa
+                                                example: PHP
                                             description:
                                                 type: string
-                                                example: null
+                                                example: Linguagem de programação
                                             created_at:
                                                 type: string
                                                 example: 2022-04-14T12:56:34+00:00
@@ -161,25 +164,10 @@ paths:
                                                 type: string
                                                 example: null
     /topics/{topicId}:
-        put:
-            tags:
-                - Topics
-            summary: Update a topics
-            parameters:
-              - 
-                in: path
-                name: topicId
-                description: ID of a topic
-                required: true
-                schema:
-                    type: string
-            responses:
-                200:
-                    description: Ok
         get:
             tags:
                 - Topics
-            summary: Gets a topics
+            summary: Get a topic
             parameters:
               - 
                 in: path
@@ -204,7 +192,7 @@ paths:
                                                 example: PHP
                                             description:
                                                 type: string
-                                                example: my description...
+                                                example: Linguagem de programação
                                             created_at:
                                                 type: string
                                                 example: 2022-04-14T12:56:34+00:00
@@ -214,7 +202,52 @@ paths:
                                             deleted_at:
                                                 type: string
                                                 example: null
-
+        put:
+            tags:
+                - Topics
+            summary: Update a topics
+            parameters:
+              - 
+                in: path
+                name: topicId
+                description: ID of a topic
+                required: true
+                schema:
+                    example: 3da5d60a-1bac-4b89-822b-ba4715ef381b
+                    type: string
+            requestBody:
+                description: Input parameters to update Topic
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    example: Python
+                                description:
+                                    type: string
+                                    example: Linguagem de programação
+            responses:
+                204:
+                    description: No Content
+        delete:
+            tags:
+                - Topics
+            summary: Delete a topic
+            parameters:
+              - 
+                in: path
+                name: topicId
+                description: ID of a topic
+                required: true
+                schema:
+                    example: 3da5d60a-1bac-4b89-822b-ba4715ef381b
+                    type: string
+            responses:
+                204:
+                    description: No Content
     /newsletters:
         get:
             tags:
